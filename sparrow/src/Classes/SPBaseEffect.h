@@ -31,6 +31,9 @@
 /// @name Methods
 /// -------------
 
+/// Funtionality to generate a program before render time so you can use VAOs
+- (void)createProgram;
+
 /// Activates the optimal shader program for the current settings; alpha and matrix uniforms are
 /// passed to the program right away, and the texture (if available) is bound.
 - (void)prepareToDraw;

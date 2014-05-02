@@ -87,6 +87,29 @@ static NSString *getProgramName(BOOL hasTexture, BOOL useTinting)
 
 #pragma mark Methods
 
+- (void)createProgram
+{
+	BOOL hasTexture = _texture != nil;
+    BOOL useTinting = _useTinting || !_texture || _alpha != 1.0f;
+	NSString *programName = getProgramName(hasTexture, useTinting);
+	_program = [[Sparrow.currentController programByName:programName] retain];
+	
+	if (!_program)
+	{
+		NSString *vertexShader   = [self vertexShaderForTexture:_texture   useTinting:useTinting];
+		NSString *fragmentShader = [self fragmentShaderForTexture:_texture useTinting:useTinting];
+		_program = [[SPProgram alloc] initWithVertexShader:vertexShader fragmentShader:fragmentShader];
+		[Sparrow.currentController registerProgram:_program name:programName];
+	}
+	
+	_aPosition  = [_program attributeByName:@"aPosition"];
+	_aColor     = [_program attributeByName:@"aColor"];
+	_aTexCoords = [_program attributeByName:@"aTexCoords"];
+	_uMvpMatrix = [_program uniformByName:@"uMvpMatrix"];
+	_uAlpha     = [_program uniformByName:@"uAlpha"];
+}
+
+
 - (void)prepareToDraw
 {
     BOOL hasTexture = _texture != nil;

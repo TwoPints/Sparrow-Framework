@@ -3,7 +3,7 @@
 //  Sparrow
 //
 //  Created by Robert Carone on 9/16/13.
-//  Copyright 2013 Gamua. All rights reserved.
+//  Copyright 2011-2014 Gamua. All rights reserved.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the Simplified BSD License.
@@ -92,7 +92,7 @@ typedef NS_ENUM(uint, SPFragmentFilterMode)
 /// ----------------
 
 /// Indicates if the filter is cached (via the "cache" method).
-@property (nonatomic, readonly) BOOL cached;
+@property (nonatomic, readonly) BOOL isCached;
 
 /// The resolution of the filter texture. "1" means stage resolution, "0.5" half the stage
 /// resolution. A lower resolution saves memory and execution time(depending on the GPU), but
